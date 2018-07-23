@@ -11,21 +11,28 @@ services:
      ports:
        - "8888"
 
+
   web:
     build: .
-    command: python ./manage.py runserver 127.0.0.1:8005
+    command: python ./manage.py runserver 0.0.0.0:8005
     volumes:
       - .:/code
     ports:
       - "8005:8005"
+    links:
+      - rabbitmq
     depends_on:
       - rabbitmq
-      
+    labels:
+      NAME: 'rabbitmq'
+
   migrate_and_run_worker:
     build: .
     command: bash -c "python manage.py migrate django_celery_results && celery -A django_cel_doc worker -l info"
     volumes:
       - .:/django_cel_doc
+    links:
+      - rabbitmq
     depends_on:
       - rabbitmq
 
