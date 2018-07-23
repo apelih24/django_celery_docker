@@ -5,7 +5,7 @@ from celery import Celery
 # set the default Django settings module for the 'celery' program.
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'django_cel_doc.settings')
 
-app = Celery('django_cel_doc')
+app = Celery('django_cel_doc',backend='db+sqlite:///db.sqlite3')
 
 # Using a string here means the worker doesn't have to serialize
 # the configuration object to child processes.

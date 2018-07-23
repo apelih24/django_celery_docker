@@ -5,3 +5,4 @@ billiard==3.5.0.4
 kombu==4.2.1
 amqp==2.3.2
 vine==1.1.4
+django-celery-results

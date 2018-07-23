@@ -1,10 +1,31 @@
 version: '3'
 
 services:
+
+  rabbitmq:
+     image:  rabbitmq:3.7.7-management
+     environment:
+        RABBITMQ_DEFAULT_USER: alex
+        RABBITMQ_DEFAULT_PASS: 123
+        RABBITMQ_DEFAULT_VHOST: jeka
+     ports:
+       - "8888"
+
   web:
     build: .
-    command: python ./manage.py runserver 0.0.0.0:8005
+    command: python ./manage.py runserver 127.0.0.1:8005
     volumes:
       - .:/code
     ports:
       - "8005:8005"
+    depends_on:
+      - rabbitmq
+      
+  migrate_and_run_worker:
+    build: .
+    command: bash -c "python manage.py migrate django_celery_results && celery -A django_cel_doc worker -l info"
+    volumes:
+      - .:/django_cel_doc
+    depends_on:
+      - rabbitmq
+
