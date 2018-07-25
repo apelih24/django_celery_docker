@@ -3,7 +3,8 @@ from django.shortcuts import render
 from celery.result import AsyncResult
 from django.http import HttpResponse
 from polls.forms import GenerateRandomUserForm
-from polls.tasks import create_random_user_accounts
+from polls.tasks import create_random_user_accounts, get_for_django
+from .models import IcoList
 
 
 def generate_random_user(request):
@@ -31,3 +32,8 @@ def get_task_info(request):
         return HttpResponse(json.dumps(data), content_type='application/json')
     else:
         return HttpResponse('No job id given.')
+
+
+def get_ico_list(request):
+    data = IcoList.objects.all()
+    return render(request, 'polls/ico-list.html', {'data': data})

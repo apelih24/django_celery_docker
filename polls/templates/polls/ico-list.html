@@ -1,0 +1,19 @@
+<table align="center">
+    <thead>
+    <th>#</th>
+    <th>Name</th>
+    <th>Ico Scale</th>
+    <th>Total</th>
+    </thead>
+    <tbody>
+    {% for i in data %}
+
+        <tr>
+            <td>{{ forloop.counter }}</td>
+            <td> {{ i.name }} </td>
+            <td> {{ i.ico_scale }} </td>
+            <td> {{ i.total }} </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>

@@ -15,10 +15,11 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from polls.views import generate_random_user, get_task_info
+from polls.views import generate_random_user, get_task_info,get_ico_list
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('generate-user/', generate_random_user),
-    path('get-task-info/', get_task_info)
+    path('get-task-info/', get_task_info),
+    path('ico-list/',get_ico_list)
 ]
