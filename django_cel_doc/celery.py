@@ -17,10 +17,10 @@ app.config_from_object('django.conf:settings', namespace='CELERY')
 # Load task modules from all registered Django app configs.
 app.autodiscover_tasks()
 
-app.conf.task_routes = {
-    'polls.tasks.*': {'queue': 'polls'},
-    'django_cel_doc.*': {'queue': 'django'}
-}
+# app.conf.task_routes = {
+#     'polls.tasks.*': {'queue': 'polls'},
+#     'django_cel_doc.*': {'queue': 'django'}
+# }
 
 
 @app.task(bind=True)

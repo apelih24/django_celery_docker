@@ -4,9 +4,9 @@ services:
 
   redis:
      image:  redis:latest
+     command: redis-server
      ports:
        - '6379:6379'
-
 
   web:
     build: .
@@ -22,7 +22,7 @@ services:
 
   celery_worker:
     build: .
-    command: bash -c "celery -A django_cel_doc worker -l info"
+    command: bash -c "celery -A django_cel_doc worker -B -l debug -n wk1@hostname"
     volumes:
       - .:/django_cel_doc
     links:
